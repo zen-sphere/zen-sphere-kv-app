@@ -24,6 +24,7 @@ jobs:
       - name: Show the current working direction
         run: |
           pwd
+          ls -a
 
       - name : Install dependencies
         run: |
