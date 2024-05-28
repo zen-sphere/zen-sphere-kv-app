@@ -10,15 +10,10 @@ jobs:
     name: "Build Laravel App"
     runs-on: ubuntu-latest 
     steps: 
-      - name : Composer install
-        run: |
-          sudo apt update
-          sudo apt install php-cli unzip
-          cd ~
-          curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
-          HASH=`curl -sS https://composer.github.io/installer.sig`
-          php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-          sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+      - name : Setup php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
 
       - name : Checkout
         uses: actions/checkout@v4
