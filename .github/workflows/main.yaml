@@ -47,6 +47,9 @@ jobs:
         run : |
           php artisan key:generate
 
+      - name: Run migrations
+        run: php artisan migrate --force
+
       - name : Run unit Test
         env:
           DB_CONNECTION: mysql
