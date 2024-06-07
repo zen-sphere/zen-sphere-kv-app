@@ -9,6 +9,23 @@ jobs:
   build: 
     name: "Build Laravel App"
     runs-on: ubuntu-latest 
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testing
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping --silent"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
     steps: 
       - name : Setup php
         uses: shivammathur/setup-php@v2
@@ -29,7 +46,20 @@ jobs:
       - name : Build the Application
         run : |
           php artisan key:generate
+
+      - name: Set up the database
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          composer require doctrine/dbal # Required if you use doctrine/dbal in your migrations
+          php artisan migrate --force
     
       - name : Run unit Test
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: testing
+          DB_USERNAME: user
+          DB_PASSWORD: password
         run : | 
           php artisan test
