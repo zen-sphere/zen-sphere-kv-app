@@ -47,6 +47,13 @@ jobs:
         run : |
           php artisan key:generate
 
+      - name: Wait for MySQL to be ready
+        run: |
+          until mysqladmin ping -h 127.0.0.1 -u user --password=password --silent; do
+            echo 'waiting for mysql...'
+            sleep 5
+          done
+
       - name: Run migrations
         run: php artisan migrate --force
 
