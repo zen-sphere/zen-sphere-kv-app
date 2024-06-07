@@ -47,12 +47,6 @@ jobs:
         run : |
           php artisan key:generate
 
-      - name: Set up the database
-        run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
-          composer require doctrine/dbal # Required if you use doctrine/dbal in your migrations
-          php artisan migrate --force
-    
       - name : Run unit Test
         env:
           DB_CONNECTION: mysql
