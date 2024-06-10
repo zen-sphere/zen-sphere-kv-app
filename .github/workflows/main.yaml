@@ -10,6 +10,17 @@ jobs:
   build: 
     name: "Build Laravel App"
     runs-on: ubuntu-latest 
+    services: 
+      mysql:
+        image: mysql:latest
+        ports:
+          - 3306:3306
+        env: 
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password 
+          MYSQL_USERNAME: root 
+          MYSQL_DATABASE: test 
+          
     steps: 
       - name : Setup php
         uses: shivammathur/setup-php@v2
@@ -27,30 +38,30 @@ jobs:
         run : |
           cp .env.ci .env
 
-          cat .env
+      #     cat .env
 
-      - name: Run MySQL Container
-        run : |
-          docker run -d \
-          --name my-mysql-container \
-          -e MYSQL_ALLOW_EMPTY_PASSWORD=false \
-          -e MYSQL_ROOT_PASSWORD=password \
-          -e MYSQL_UESRNAME=user \
-          -e MYSQL_DATABASE=test \
-          -p 3306:3306 \
-          mysql:latest
+      # - name: Run MySQL Container
+      #   run : |
+      #     docker run -d \
+      #     --name my-mysql-container \
+      #     -e MYSQL_ALLOW_EMPTY_PASSWORD=false \
+      #     -e MYSQL_ROOT_PASSWORD=password \
+      #     -e MYSQL_USERNAME=root \
+      #     -e MYSQL_DATABASE=test \
+      #     -p 3306:3306 \
+      #     mysql:latest
           
-      - name: Sleep
-        run : |
-          sleep 15
+      # - name: Sleep
+      #   run : |
+      #     sleep 15
 
-      - name: Check docker status
-        run : |
-          docker ps
+      # - name: Check docker status
+      #   run : |
+      #     docker ps
       
-      - name: Check Network Status
-        run : |
-          netstat -an | grep 3306
+      # - name: Check Network Status
+      #   run : |
+      #     netstat -an | grep 3306
 
       - name: Build the Application
         run : |
