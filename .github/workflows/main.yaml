@@ -27,6 +27,8 @@ jobs:
         run : |
           cp .env.ci .env
 
+          cat .env
+
       - name: Run MySQL Container
         run : |
           docker run -d \
