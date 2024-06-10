@@ -30,16 +30,13 @@ jobs:
       - name: Run MySQL Container
         run : |
           docker run -d \
+          --name my-mysql-container
           -e MYSQL_ALLOW_EMPTY_PASSWORD=false \
           -e MYSQL_ROOT_PASSWORD=password \
-          -e MYSQL_DATABASE=testing \
+          -e MYSQL_DATABASE=test \
           -p 3306:3306 \
           mysql:latest
           
-      - name: Build the Application
-        run : |
-          php artisan key:generate
-
       - name: Sleep
         run : |
           sleep 20
@@ -51,6 +48,10 @@ jobs:
       - name: Check Network Status
         run : |
           netstat -an | grep 3306
+
+      - name: Build the Application
+        run : |
+          php artisan key:generate
 
       - name: Migrate the Database
         run : |
