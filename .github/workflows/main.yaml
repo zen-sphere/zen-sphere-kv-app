@@ -35,13 +35,14 @@ jobs:
           --name my-mysql-container \
           -e MYSQL_ALLOW_EMPTY_PASSWORD=false \
           -e MYSQL_ROOT_PASSWORD=password \
+          -e MYSQL_UESRNAME=user \
           -e MYSQL_DATABASE=test \
           -p 3306:3306 \
           mysql:latest
           
       - name: Sleep
         run : |
-          sleep 20
+          sleep 15
 
       - name: Check docker status
         run : |
