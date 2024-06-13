@@ -1,11 +1,6 @@
 name: Build Laravel App
 
-on:
-  workflow_call:
-    inputs:
-      php-version:
-        required: true
-        type: string
+on: workflow_call
 
 jobs:
   build:
