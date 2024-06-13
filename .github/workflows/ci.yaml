@@ -13,6 +13,10 @@ jobs:
     name: Build Laravel App
     runs-on: ubuntu-latest
     steps:
+      - name: directory path
+        run: |
+          pwd | ls
+
       - name: Build App
         uses: ./.github/actions/build-laravel
 
