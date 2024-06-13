@@ -20,11 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      -name: Build Laravel App
-        runs-on: ubuntu-latest
-        uses: ./.github/workflows/build.yml
-        with:
-          php-version: "8.3"
+      # -name: Build Laravel App
+      #   runs-on: ubuntu-latest
+      #   uses: ./.github/workflows/build.yml
+      #   with:
+      #     php-version: "8.3"
 
   test:
     name: Test the Application

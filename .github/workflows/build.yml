@@ -1,4 +1,3 @@
-# .github/workflows/build-laravel.yml
 name: Build Laravel App
 
 on:
@@ -23,12 +22,6 @@ jobs:
       - name: Install dependencies
         run: |
           composer install
-      
-      - name: Cache the Vendor
-        uses: actions/cache@v4.0.2
-        with:
-          key: ${{ github.sha }}-php-vendor-cache
-          path: ./vendor
 
       - name: Create .env
         run: |

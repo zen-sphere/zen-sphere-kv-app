@@ -16,12 +16,6 @@ runs:
         composer install
       shell: bash
 
-    - name: Cache the Vendor
-      uses: actions/cache@v4.0.2
-      with:
-        key: ${{ github.sha }}-php-vendor-cache
-        path: ./vendor
-
     - name: Create .env
       run: |
         cp .env.ci .env
