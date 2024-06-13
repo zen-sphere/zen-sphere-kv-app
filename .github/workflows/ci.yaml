@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: directory path
         run: |
-          pwd | ls
+          pwd
 
       - name: Build App
         uses: ./.github/actions/build-laravel
