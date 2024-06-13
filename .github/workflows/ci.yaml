@@ -1,6 +1,6 @@
+# .github/workflows/ci.yml
 name: CI Workflow
 
-# trigger
 on:
   push:
   pull_request:
@@ -12,16 +12,9 @@ jobs:
   build:
     name: Build Laravel App
     runs-on: ubuntu-latest
-    steps:
-      - name: Directory path
-        run: |
-          pwd
-          
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build App
-        uses: ./.github/actions/build
+    uses: ./.github/workflows/build.yml
+    with:
+      php-version: "8.3"
 
   test:
     name: Test the Application
@@ -41,5 +34,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Test Laravel App
-        uses: ./.github/actions/test
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+
+      - name: Composer Install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          composer install
+
+      - name: Create .env
+        run: |
+          cp .env.ci .env
+          cp .env.ci .env.testing
+
+      - name: Generate the key
+        run: |
+          php artisan key:generate
+
+      - name: Migrate the Database
+        run: |
+          php artisan migrate
+
+      - name: Run Unit Testing
+        run: |
+          php artisan test

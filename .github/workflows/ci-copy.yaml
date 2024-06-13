@@ -1,4 +1,4 @@
-name: QA Workflow
+name: CI Workflow
 
 # trigger
 on:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build App
+    name: Build Laravel App
     runs-on: ubuntu-latest
     steps:
       - name: Directory path
@@ -20,11 +20,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      -name: Build Laravel App
-        runs-on: ubuntu-latest
-        uses: ./.github/workflows/build.yml
-        with:
-          php-version: "8.3"
+      - name: Build App
+        uses: ./.github/actions/build
 
   test:
     name: Test the Application
