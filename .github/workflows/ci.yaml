@@ -16,12 +16,12 @@ jobs:
       - name: directory path
         run: |
           pwd
-          
+
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Build App
-        uses: ./.github/actions/build-laravel
+        uses: /.github/actions/build-laravel
 
   test:
     name: Test the Application
