@@ -1,5 +1,5 @@
-name: 'Build Laravel App'
-description: 'Build steps for Laravel application'
+name: 'Build App'
+description: 'Build steps application'
 runs:
   using: 'composite'
   steps:
