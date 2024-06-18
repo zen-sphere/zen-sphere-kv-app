@@ -30,6 +30,10 @@ jobs:
         with:
           fetch-depth: 0  
 
+      - name: display secret
+        run: |
+          echo ${{ secrets.SONAR_TOKEN }}
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env: 
