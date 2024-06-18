@@ -1,7 +1,7 @@
 name: Sonar Cloud
 
 on: 
-  workflow_call
+  workflow_call:
     inputs:
       token:
         required: true
