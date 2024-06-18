@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v2.1.0 # Use a stable version
+        uses: sonarsource/sonarcloud-github-action@v2.1.0
         with:
           args: >
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
