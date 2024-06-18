@@ -20,21 +20,25 @@ jobs:
     needs: [build]
     uses: ./.github/workflows/test.yaml
 
-  sonarcloud:
-    name: SonarCloud
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+  sonarcloud: 
+    name: "Sonar Cloud Scan"
+    uses: ./.github/workflows/sonarcloud.yaml
 
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v2.1.0
-        with:
-          args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.organization=${{ secrets.SONAR_ORG }}
-        env: 
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  # sonarcloud:
+  #   name: SonarCloud
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+
+  #     - name: SonarCloud Scan
+  #       uses: sonarsource/sonarcloud-github-action@v2.1.0
+  #       with:
+  #         args: >
+  #           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+  #           -Dsonar.organization=${{ secrets.SONAR_ORG }}
+  #       env: 
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
