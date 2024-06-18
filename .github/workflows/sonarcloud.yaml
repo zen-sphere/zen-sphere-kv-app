@@ -1,11 +1,6 @@
 name: Sonar Cloud
 
-on: 
-  workflow_call:
-    inputs:
-      token:
-        required: true
-        type: string
+on: workflow_call
 
 jobs:
   sonar_cloud: 
@@ -22,5 +17,4 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.organization=${{ secrets.SONAR_ORG }}
         env: 
-          # SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_TOKEN: ${{inputs.token}}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

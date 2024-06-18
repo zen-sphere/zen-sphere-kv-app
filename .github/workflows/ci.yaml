@@ -24,9 +24,7 @@ jobs:
     name: "Sonar Cloud Scan"
     needs: [build]
     uses: ./.github/workflows/sonarcloud.yaml
-    with:
-      token: "${{ secrets.SONAR_TOKEN }}"
-
+    
   # sonarcloud:
   #   name: SonarCloud
   #   needs: [build]
