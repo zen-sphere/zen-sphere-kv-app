@@ -1,0 +1,16 @@
+.env
+storage
+bootstrap/cache/*
+compiled.php
+.cache
+logs/*
+.idea/*
+phpstorm.config.php
+vscode/*
+phpunit.xml
+tests/Report.xml
+vendor/
+node_modules/
+.dockerignore
+.dockerenv
+*.pem
