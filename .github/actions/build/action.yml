@@ -1,0 +1,28 @@
+name: 'Build App'
+description: 'Build steps application'
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "8.3"
+
+    - name: Install dependencies
+      run: |
+        composer install
+      shell: bash
+
+    - name: Create .env
+      run: |
+        cp .env.ci .env
+        cp .env.ci .env.testing
+      shell: bash
+
+    - name: Generate the key
+      run: |
+        php artisan key:generate
+      shell: bash
