@@ -29,9 +29,9 @@ jobs:
       SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
       SONAR_ORG: ${{ secrets.SONAR_ORG }}
 
-    trivy-fs-scan: 
-      name: "Trivy File Scan"
-      uses: ./.github/workflows/trivy-file-scan.yaml
+  trivy-fs-scan: 
+    name: "Trivy File Scan"
+    uses: ./.github/workflows/trivy-file-scan.yaml
 
   # trivy-scan:
   #   name: Trivy Scan
